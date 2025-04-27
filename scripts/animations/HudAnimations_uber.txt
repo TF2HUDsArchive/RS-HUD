@@ -1,0 +1,32 @@
+//===========================================
+
+// Flash the medic charge hud when we have full charge
+
+event HudMedicCharged
+{
+	Animate	ChargeLabel							FgColor			"Uber Full"				Linear 0.0 0.0
+	Animate	ChargeLabel							FgColor			"Uber Full Pulse"		Linear 0.0 0.25
+	Animate	ChargeLabel							FgColor			"Uber Full"				Linear 0.3 0.25
+
+	RunEvent HudMedicChargedLoop 0.6
+}
+
+// call to loop HudHealthBonusPulse
+event HudMedicChargedLoop
+{
+	RunEvent HudMedicCharged 0.0
+}
+
+event HudMedicChargedStop
+{
+	StopEvent HudMedicCharged 0.0
+	StopEvent HudMedicChargedLoop 0.0
+	StopPanelAnimations ChargeLabel 0.0
+	StopPanelAnimations ChargeLabel2 0.0
+	StopPanelAnimations ChargeMeter 0.0
+	
+	Animate	ChargeLabel							FgColor			"Uber"					Linear 0.0 0.0
+	Animate	ChargeMeter							FgColor			"Uber"		        	Linear 0.0 0.0
+}
+
+//===========================================

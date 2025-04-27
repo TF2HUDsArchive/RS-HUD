@@ -1,0 +1,112 @@
+//===========================================
+
+// CTF intel pickup animation
+
+event FlagOutlineHide
+{
+	Animate OutlineImage	Alpha		"0"				Linear 0.0 0.0
+}
+event FlagOutline
+{
+	Animate OutlineImage	Alpha		"0"				Linear 0.0 0.0
+}
+
+//===========================================
+
+// Spy Disguise
+event HudSpyDisguiseChanged
+{
+	Animate PlayerStatusSpyOutlineImage		Alpha		"255"			Linear 0.0 0.15
+	
+	Animate PlayerStatusSpyOutlineImage		Position	"90 360"		linear 0.0 0.3
+	Animate PlayerStatusSpyOutlineImage		Size		"120 120"		Linear 0.0 0.3
+
+	RunEvent HudSpyDisguiseHide	0.6
+}
+
+event HudSpyDisguiseHide
+{
+	Animate PlayerStatusSpyOutlineImage		Position	"48 426"		Linear 0.0 0.3
+	Animate PlayerStatusSpyOutlineImage		Size		"54 54"			Linear 0.0 0.3
+	
+	Animate PlayerStatusSpyOutlineImage		Alpha		"0"				Linear 0.45 0.15
+}
+
+event HudSpyDisguiseFadeIn
+{
+	RunEvent HudSpyDisguiseChanged	0
+	Animate PlayerStatusSpyImage			Alpha		"255"			Linear 0.3 0.15	
+}
+
+event HudSpyDisguiseFadeOut
+{
+	RunEvent HudSpyDisguiseChanged	0
+	Animate PlayerStatusSpyImage			Alpha		"0"				Linear 0.3 0.15	
+}
+
+//===========================================
+
+event HudTournamentSetupPanelOpen
+{
+	Animate HudTournamentSetup	Position	"c-50 -50"	Linear 0.0 0.001
+	Animate HudTournamentSetup	Position	"c-50 50"	Spline 0.001 0.1
+}
+
+event HudTournamentSetupPanelClose
+{
+	Animate HudTournamentSetup	Position	"c-50 50"	Linear 0.0 0.001
+	Animate HudTournamentSetup	Position	"c-50 -50"	Spline 0.001 0.1
+}
+
+//===========================================
+
+event ActiveTimerHighlight
+{
+	Animate TimePanelValue 							FgColor		"White"								Linear 	0.0 0.0
+}
+
+event ActiveTimerDim
+{
+	Animate TimePanelValue 							FgColor		"White"								Linear 	0.0 0.0
+}
+
+//===========================================
+
+event CompetitiveGame_LowerChatWindow
+{
+	Animate HudChat xpos "2" Linear 	0 0
+}
+
+event CompetitiveGame_RestoreChatWindow
+{
+	Animate HudChat xpos "2" Linear 	0 0
+}
+
+event HudTournament_MoveChatWindow
+{
+	RunEvent CompetitiveGame_LowerChatWindow 0
+	RunEvent CompetitiveGame_RestoreChatWindow 10
+}
+
+//===========================================
+event TeamStatus_PlayerDead
+{
+	SetVisible DeathPanel  0 0
+	SetVisible SkullPanel  0 0
+	SetVisible respawntime  1 0
+
+	Animate DeathPanel ypos 0 Linear 0 0.0
+	Animate SkullPanel ypos 0 Linear 0 0.0
+	Animate respawntime ypos 0 Linear 0 0.0
+}
+
+event TeamStatus_PlayerAlive
+{
+	Animate DeathPanel ypos 0 Linear 0 0.0
+	Animate SkullPanel ypos 0 Linear 0 0.0
+	Animate respawntime ypos 0 Linear 0 0.0
+
+	SetVisible DeathPanel 0 0.0
+	SetVisible SkullPanel 0 0.0
+	SetVisible respawntime 0 0.0
+}
